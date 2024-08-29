@@ -5,7 +5,7 @@ from tkinter import ttk
 from tkinter import filedialog
 
 def sort_files():
-    downloads_path = os.path.expanduser("/Users/paramkhodiyar/Downloads")
+    downloads_path = os.path.expanduser("Your download folder or any source folder path")
     destination_path = filedialog.askdirectory(title="Select destination folder")
     if not destination_path:
         status_label.config(text="Destination folder not selected. Aborting.")
