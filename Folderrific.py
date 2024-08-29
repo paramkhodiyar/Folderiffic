@@ -4,8 +4,9 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
 
+downloads_path = ""
+
 def sort_files():
-    downloads_path = os.path.expanduser("/Users/paramkhodiyar/Downloads")
     destination_path = filedialog.askdirectory(title="Select destination folder")
     if not destination_path:
         status_label.config(text="Destination folder not selected. Aborting.")
@@ -46,6 +47,15 @@ def sort_files():
     
     status_label.config(text=f"Done! Moved {moved_count} files, Skipped {skipped_count} files.")
 
+def select_downloads_folder():
+    global downloads_path
+    downloads_path = filedialog.askdirectory(title="Select the Downloads folder")
+    if not downloads_path:
+        status_label.config(text="Downloads folder not selected. Aborting.")
+        return
+    
+    status_label.config(text="Downloads folder selected successfully.")
+    sort_button.config(state="normal")
 
 root = tk.Tk()
 root.title("File Sorter")
@@ -57,6 +67,8 @@ keyword_label.pack(pady=(10, 0))
 keyword_entry = ttk.Entry(root, width=30)
 keyword_entry.pack(pady=(0, 10))
 
+downloads_path_button = ttk.Button(root, text="Choose the Downloads Folder", command=select_downloads_folder)
+downloads_path_button.pack(pady=10)
 
 sort_button = ttk.Button(root, text="Choose the destination Folder", command=sort_files)
 sort_button.pack(pady=10)
